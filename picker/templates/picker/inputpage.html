@@ -1,0 +1,25 @@
+{% extends 'picker/base.html' %}
+
+{% block content %}
+<form action="{% url 'resultPage' %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Example file input</label>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+
+  <input type="submit" class="btn btn-primary">
+</form>
+
+
+<div class="">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top img-fluid" alt="사용자가 전송한 이미지">
+      <div class="card-body">
+        <a class="btn btn-outline-secondary" href="#">이 이미지로 테스트</a>
+      </div>
+    </div>
+</div>
+
+{% endblock content %}
+

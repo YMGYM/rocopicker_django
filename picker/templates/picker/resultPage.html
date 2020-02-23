@@ -1,0 +1,27 @@
+{% extends 'picker/base.html' %}
+
+{% block content %}
+<div class="">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top img-fluid" alt="사용자가 전송한 이미지">
+      <div class="card-body">
+        <p class="card-text">결과 메세지</p>
+      </div>
+    </div>
+</div>
+
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    상세 정보 보기
+</a>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+      Softmax 결과값([Roco, Not_Roco]) : <br />
+      XCeption 모델의 CAM : <br />
+      현재 적용 모델 : RocoPicker2 : <br />
+  </div>
+</div>
+{% endblock content %}
+
+<script>
+
+</script>

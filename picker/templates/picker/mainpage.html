@@ -1,9 +1,17 @@
 {% extends 'picker/base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1>
-        안녕
-    </h1>
+
+<div class="jumbotron">
+  <h1 class="display-4">로코픽커</h1>
+  <p class="lead">로코픽커는 아이돌 마스터 밀리언 라이브의 "한다 로코"를 구분해 내는 AI 입니다.
+  </p>
+  <hr class="my-4">
+  <p>지금 사용해 보세요</p>
+  <a class="btn btn-primary btn-lg" href="{% url 'inputPage' %}" role="button">시작하기</a>
+  <a class="btn btn-primary btn-lg" href="#" role="button">크레딧</a>
 </div>
+
+
+
 {% endblock content %}
