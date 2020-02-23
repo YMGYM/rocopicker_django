@@ -1,25 +1,60 @@
 {% extends 'picker/base.html' %}
-
+{% load static %}
 {% block content %}
-<div class="">
-    <div class="card" style="width: 18rem;">
-      <img src="..." class="card-img-top img-fluid" alt="사용자가 전송한 이미지">
-      <div class="card-body">
-        <p class="card-text">결과 메세지</p>
-      </div>
+
+<div class="row">
+    <div class="col-md-12 align-center">
+        <img src="{% static 'images/signature.png' %}" width="100px" height="100px" class="margintop20">
+        <h1 class="display-4 cookieBold">리스폰스</h1>
+    </div>
+</div>
+<hr />
+
+
+
+<div class="row">
+    <div class="align-center">
+        <img src="{% static 'images/rocofull.png' %}" width="299px" height="299px">
+    
+    </div>
+        
+</div>
+
+<div class="row margintop20">
+    <div class="col-sm-12 align-center">
+        <p class="GMbig">
+            결과 메시지
+        </p>
     </div>
 </div>
 
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    상세 정보 보기
-</a>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-      Softmax 결과값([Roco, Not_Roco]) : <br />
-      XCeption 모델의 CAM : <br />
-      현재 적용 모델 : RocoPicker2 : <br />
-  </div>
+<div class='row'>
+    <div class='align-center'>
+     
+        <a class="btn btn-primary" href="{% url 'inputPage' %}">
+        다시하기
+        </a>
+           
+    </div>
 </div>
+<hr/>
+<div class='row margintop20'>
+    <div class='align-center'>
+     
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    상세 정보 보기
+    </a>
+    <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+          Softmax 결과값([Roco, Not_Roco]) : <br />
+          XCeption 모델의 CAM : <br />
+          현재 적용 모델 : RocoPicker2 : <br />
+    </div>
+    </div>
+           
+    </div>
+</div>
+
 {% endblock content %}
 
 <script>

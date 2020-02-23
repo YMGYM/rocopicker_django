@@ -1,25 +1,68 @@
 {% extends 'picker/base.html' %}
+{% load static %}
 
 {% block content %}
-<form action="{% url 'resultPage' %}" method="POST">
-  {% csrf_token %}
-  <div class="form-group">
-    <label for="exampleFormControlFile1">Example file input</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-  </div>
 
-  <input type="submit" class="btn btn-primary">
-</form>
+<div class="row">
+    <div class="col-md-12 align-center">
+        <img src="{% static 'images/signature.png' %}" width="100px" height="100px" class="margintop20">
+        <h1 class="display-4 cookieBold">스타트!</h1>
+    </div>
+</div>
+<hr>
 
+<div class="row">
+    <div class="col-sm-12 align-center">
+        <form action="{% url 'resultPage' %}" method="POST" class="align-center">
+          {% csrf_token %}
+            <p class="GM">
+                가지고 있는 워크-오브-아트를 아래 폼에 넣어 주시고 <br />서브밋 해 주세요!
+            </p>
+            <input type="file" class="margintop20" id="exampleFormControlFile1">
 
-<div class="">
-    <div class="card" style="width: 18rem;">
-      <img src="..." class="card-img-top img-fluid" alt="사용자가 전송한 이미지">
-      <div class="card-body">
-        <a class="btn btn-outline-secondary" href="#">이 이미지로 테스트</a>
-      </div>
+            <input type="submit" class="btn btn-primary" value="서브밋!">
+        </form>
     </div>
 </div>
 
+
+<h1 class="margintop50 cookieBold">
+    샘플 이미지
+</h1>
+<hr />
+
+<div class="row align-center">
+
+        <div class="col-md-6">
+            <div class="card align-center" style="width: 18rem;">
+              <img src="{% static 'images/rocofull.png' %}" class="card-img-top img-fluid" alt="사용자가 전송한 이미지">
+              <div class="card-body">
+                <a class="btn btn-outline-secondary" href="#">이 이미지로 서브밋</a>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card align-center" style="width: 18rem;">
+              <img src="{% static 'images/rocofull2.png' %}" class="card-img-top img-fluid" alt="사용자가 전송한 이미지">
+              <div class="card-body">
+                <a class="btn btn-outline-secondary" href="#">이 이미지로 서브밋</a>
+              </div>
+            </div>
+        </div>
+
+</div>
+<h1 class="margintop50 cookieBold">
+    주의 및 권장사항
+</h1>
+<hr />
+
+<ul class="GM">
+    <li>로코픽커는 이미지를 포함한 사용자의 개인정보를 서버에 저장하지 않습니다.</li>
+    <li>전송된 이미지는 서버에서 분석 후 결과 페이지를 전송하는 동시에 삭제됩니다.</li>
+    <li>로코픽커의 현재 정확도는 약 75% 정도입니다.</li>
+    <li>높은 분류 정확도를 위해선 다른 사물이 없고, 공식 이미지가 권장됩니다.</li>
+    <li>이 외의 이미지들은 올바르게 분류되지 못할 수 있습니다.</li>
+</ul>
 {% endblock content %}
 
