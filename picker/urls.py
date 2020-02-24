@@ -7,5 +7,7 @@ urlpatterns = [
     path('inputPage/', views.inputPage, name="inputPage"),
     path('result/', views.resultPage, name="resultPage"),
     path('credit/', views.creditPage, name="creditPage"),
+    path('predict/sample1/', views.sample1predict, name="sample1"),
+    path('predict/sample2/', views.sample2predict, name="sample2"),
 ]
 

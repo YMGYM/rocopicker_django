@@ -20,4 +20,5 @@ from picker import urls as pickerView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('picker/', include(pickerView)),
+    path('', include(pickerView)),
 ]

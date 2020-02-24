@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12 align-center">
         <img src="{% static 'images/signature.png' %}" width="100px" height="100px" class="margintop20">
-        <h1 class="display-4 cookieBold">리스폰스</h1>
+        <h1 class="display-4 yutobig">리스폰스</h1>
     </div>
 </div>
 <hr />
@@ -14,16 +14,15 @@
 
 <div class="row">
     <div class="align-center">
-        <img src="{% static 'images/rocofull.png' %}" width="299px" height="299px">
-    
+        <img src="data:image/jpeg;base64, {{image}}" width="299px" height="299px"/>
     </div>
         
 </div>
 
 <div class="row margintop20">
     <div class="col-sm-12 align-center">
-        <p class="GMbig">
-            결과 메시지
+        <p class="yutobig">
+            로코일 확률은 {{percentage}}% 입니다.
         </p>
     </div>
 </div>
@@ -46,7 +45,7 @@
     </a>
     <div class="collapse" id="collapseExample">
     <div class="card card-body">
-          Softmax 결과값([Roco, Not_Roco]) : <br />
+          Softmax 결과값([Roco, Not_Roco]) : {{ result }} <br />
           XCeption 모델의 CAM : <br />
           현재 적용 모델 : RocoPicker2 : <br />
     </div>
