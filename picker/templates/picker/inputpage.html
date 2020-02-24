@@ -11,9 +11,45 @@
 </div>
 <hr>
 
+<!-- 로딩바------------------------------------- -->
+
+<div class="loadingbox display-none" id="load">
+    <div class="row">
+        <div class="col-md-12 align-center">
+            <img src="{% static 'images/signature.png' %}" width="100px" height="100px" class="margintop20">
+            <h1 class="display-4 yutobig">처리중</h1>
+        </div>
+    </div>
+    
+    <div class='row'>
+        <div class='align-center'>
+            <div class="spinner-border text-primary margintopauto" role="status">
+             <span class="sr-only" >Loading...</span>
+            </div>
+        </div>
+    </div>
+        
+    <br />
+    
+    <div class='align-center'>
+        <div class='row'>
+            <div class='col-4'>
+                <img src="{% static 'images/face3.png' %}" align="right" width="100px" height="100px">
+            </div>
+
+            <div class='col-8 margintopauto'>
+                <p class="yuto " align="left">처리 중이에요! <br /> 잠시만 기다려 주세요!</p>
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+<!-- --------------------------------------------- -->
+
 <div class="row">
     <div class="col-sm-12 align-center">
-        <form action="{% url 'resultPage' %}" method="POST" class="align-center" enctype="multipart/form-data">
+        <form action="{% url 'resultPage' %}" method="POST" onsubmit="return showSpin()" class="align-center" enctype="multipart/form-data">
           {% csrf_token %}
             <p class="yuto">
                 가지고 있는 워크-오브-아트를 아래 폼에 넣어 주시고 <br />서브밋 해 주세요!
@@ -26,10 +62,13 @@
 </div>
 
 
+
+
 <h1 class="margintop50 yutobig">
     샘플 이미지
 </h1>
 <hr />
+
 
 <div class="row align-center">
 
@@ -37,7 +76,7 @@
             <div class="card align-center" style="width: 18rem;">
               <img src="{% static 'images/rocofull.png' %}" class="card-img-top img-fluid" alt="사용자가 전송한 이미지">
               <div class="card-body">
-                <form action="{% url 'sample1' %}" method="POST" class="align-center" enctype="multipart/form-data">
+                <form action="{% url 'sample1' %}" method="POST" class="align-center" onsubmit="return showSpin()" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type=submit class="btn btn-outline-secondary" value="이 이미지로 서브밋" />
                 </form>
@@ -49,7 +88,7 @@
             <div class="card align-center" style="width: 18rem;">
               <img src="{% static 'images/rocofull2.png' %}" class="card-img-top img-fluid" alt="사용자가 전송한 이미지">
               <div class="card-body">
-                <form action="{% url 'sample2' %}" method="POST" class="align-center" enctype="multipart/form-data">
+                <form action="{% url 'sample2' %}" method="POST" onsubmit="return showSpin()" class="align-center" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type=submit class="btn btn-outline-secondary" value="이 이미지로 서브밋" />
                 </form>
@@ -70,5 +109,18 @@
     <li>높은 분류 정확도를 위해선 다른 사물이 없고, 공식 이미지가 권장됩니다.</li>
     <li>이 외의 이미지들은 올바르게 분류되지 못할 수 있습니다.</li>
 </ul>
+
+<!-- <div class="no-scroll">
+    <img src="{% static 'images/CI2.png' %}" class="background">
+</div> -->
+
+<script>
+    function showSpin(){
+        document.getElementById("load").classList.remove("display-none");;
+    }
+</script>
+
+
+
 {% endblock content %}
 

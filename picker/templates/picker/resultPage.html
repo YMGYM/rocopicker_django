@@ -20,9 +20,13 @@
 </div>
 
 <div class="row margintop20">
-    <div class="col-sm-12 align-center">
+    <div class="col-sm-12 col-md-3 align-center">
+        <img src="{% static 'images/face1.png' %}" width="100px" height="100px" class="">
+    </div>
+    <div class="col-sm-12 col-md-9 align-center">
         <p class="yutobig">
-            로코일 확률은 {{percentage}}% 입니다.
+            로코일 확률은 {{percentage}}% 이에요!<br />
+            {{resultMsg}}
         </p>
     </div>
 </div>
@@ -53,6 +57,10 @@
            
     </div>
 </div>
+<div class="no-scroll">
+    <img src="{% static 'images/CI5.png' %}" class="background">
+</div>
+
 
 {% endblock content %}
 

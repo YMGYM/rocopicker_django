@@ -73,6 +73,30 @@
     font-family: 'BBTreeGR';
 }
 
+.display-none{
+    display:none;
+}
+
+
+.loadingbox{
+    width: 70%;
+    height: 50%;
+    z-index: 100;
+    background-color: white;
+    position: fixed;
+    left: calc(-50vw + 50%);
+    right: calc(-50vw + 50%);
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.whiteback{
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+}
+
+
 @font-face { font-family: 'CookieRunOTF-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff'); font-weight: normal; font-style: normal; }
 
 @font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }

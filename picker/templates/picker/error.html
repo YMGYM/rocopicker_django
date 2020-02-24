@@ -1,0 +1,28 @@
+{% extends 'picker/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 align-center">
+        <img src="{% static 'images/signature.png' %}" width="100px" height="100px" class="margintop20">
+        <h1 class="display-4 yutobig">에러!</h1>
+    </div>
+</div>
+
+<div class="row align-center margintop20">
+    <div class="col-md-3 align-center">
+        <img src="{% static 'images/face5.png' %}" width="100px" height="100px">
+    </div>
+    <div class="col-md-9 margintopauto">
+        <p class="lead yuto"  >잘못된 접근입니다! 다시 트라이 해주세요!</p>
+    </div>
+</div>
+
+<div class="row">
+        <div class='col-6 col-lg-6 align-center'>
+            <a class="btn btn-primary btn-lg yuto" href="{% url 'mainPage' %}" role="button">처음으로</a> 
+        </div>
+</div>
+
+{% endblock content %}
+
