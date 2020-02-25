@@ -19,7 +19,6 @@ Django==2.2.4
 entrypoints==0.3
 filelock==3.0.12
 flake8==3.7.9
-Flask==1.1.1
 gast==0.2.2
 google-auth==1.7.1
 google-auth-oauthlib==0.4.1
@@ -111,7 +110,6 @@ tensorflow-estimator==2.1.0
 termcolor==1.1.0
 terminado==0.8.3
 testpath==0.4.4
-torchvision==0.4.2+cpu
 tornado==6.0.3
 tqdm==4.39.0
 traitlets==4.3.3
