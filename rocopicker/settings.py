@@ -73,19 +73,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'rocopicker.wsgi.application'
 
 
-Database
-https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
+DDATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'YMGYM',
+        'NAME': 'djangogirls',
         'USER': 'name',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
     }
 }
+
 
 
 # Password validation
