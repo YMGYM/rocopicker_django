@@ -1,1 +1,1 @@
-web: gunicorn rocopicker.wsgi --log-file -
+web: gunicorn rocopicker.wsgi --timeout 30 --log-file - 
