@@ -42,7 +42,7 @@ def sample1predict(request):
         
         model = predictapp.load_model()
     
-    data = Image.open(os.path.join(settings.STATIC_ROOT,'images/sample1.jpg')).convert('RGB') 
+    data = Image.open(os.path.join(settings.STATICFILES_DIRS[0],'images/sample1.jpg')).convert('RGB') 
     
     result, frame_b64, percentage, msg = predictapp.predict(model, data)
     
@@ -58,7 +58,7 @@ def sample2predict(request):
         
         model = predictapp.load_model()
     
-    data = Image.open(os.path.join(settings.STATIC_ROOT,'images/sample2.jpg')).convert('RGB') 
+    data = Image.open(os.path.join(settings.STATICFILES_DIRS[0],'images/sample2.jpg')).convert('RGB') 
     
     
     result, frame_b64, percentage, msg = predictapp.predict(model, data)
@@ -71,3 +71,9 @@ def creditPage(request):
     
     return render(request, 'picker/creditPage.html')
 
+
+def error404(request, exception):
+    return render(request,'picker/error.html', status=404)
+
+def error500(request):
+    return render(request,'picker/error.html', status=500)
