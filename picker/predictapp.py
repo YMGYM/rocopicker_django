@@ -31,12 +31,12 @@ def predict(model, sent_img):
     frame_buff = cv2.imencode('.jpg', im)[1]
     frame_b64 = base64.b64encode(frame_buff).decode("utf-8")
     
-    score = result[0][1]
+    score = result[0][0]
 
     if score >= 0.7:
         resultMsg = "이건 로코의 퍼스널리티에 저스트-핏! 이네요! 확실해요!"
-    elif score >= 0.6:
-        resultMsg = "흠.. 조금 낫-클리어한 로코의 퍼스널리티의 필링이에요!"
+    elif score >= 0.5:
+        resultMsg = "흠.. 조금 로코의 퍼스널리티의 필링이긴 한데..낫-클리어하네요!"
     elif score >= 0.3:
         resultMsg = "이건 로코라고 하기엔 낫-클리어한 인스피레이션이네요..."
     else:
