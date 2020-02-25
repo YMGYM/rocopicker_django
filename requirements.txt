@@ -67,6 +67,7 @@ opencv-python-headless==4.2.0.32
 opt-einsum==3.1.0
 packaging==19.2
 pandas==0.25.3
+PostgreSQL==
 pandocfilters==1.4.2
 parso==0.5.1
 patsy==0.5.1
@@ -124,4 +125,5 @@ whitenoise==5.0.1
 widgetsnbextension==3.5.1
 wrapt==1.11.2
 zipp==0.6.0
-psycopg2==2.6.2
+psycopg2==2.7.1
+PostgreSQL==12.2
