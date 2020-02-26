@@ -7,15 +7,45 @@
     </h3>
 
 <!-- Replace this with your image. Make sure CORS settings allow reading the image! -->
-<img id="img" src="{% static 'images/rocofull.png' %}" />
+<img id="img" src="{% static 'images/check06.jpg' %}" />
 
     <script>
         const img = document.getElementById('img');
 
-        const model = tf.loadGraphModel("{% static 'model/rocopickerjs/model.json' %}");
-        console.log(model)
-    </script>
+        // const model = tf.loadLayersModel("{% static 'model/rocopickerjs/model.json' %}");
+        // const prediction = model.predict(img);
+        
+        async function asyncCall() {
+            console.log('모델을 불러오는 중');
+            const model = await tf.loadLayersModel("{% static 'model/rocopickerjs/model.json' %}")
+            console.log('모델 로드 완료');
+            
+            const piximg = tf.browser.fromPixels(img);
+            console.log('이미지 로드 완료');
+            
+            regulizer = tf.scalar(255.0);
+            regulized_img = tf.div(piximg, regulizer);
+            console.log('이미지 정규화 완료');
+            console.log(regulized_img.shape)
+            
+            const expdim = regulized_img.expandDims(0);
+            console.log('이미지를 4차원 텐서로 변환');
+        
+            const resized = tf.image.resizeBilinear(expdim,[299,299]);
+            console.log('이미지 크기 변환 완료');
+            
+            
+            console.log('예측 중');
+            const prediction = await model.predictOnBatch(resized);
+            console.log('예측 완료');
+            
+            console.log(prediction.print());
+            
+            
+        }
 
+asyncCall();
+    </script>
 
 {% endblock content %}
 
