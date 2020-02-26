@@ -1,4 +1,4 @@
-model
+model/
 README.md
 *.log
 *.pot
