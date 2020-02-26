@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from . import predictapp
+# from . import predictapp
 from PIL import Image
 import os
 from django.conf import settings
@@ -33,12 +33,12 @@ def resultPage(request):
         else:
             resultMsg = ".. 이건 로코의 포트레이트는 아니네요!"
             
-            
+        result = [score, float(request.POST['score2'])]
         percentage = score * 100
         frame_b64 = request.POST['imageForm']
         
         
-        return render(request, 'picker/resultPage.html', {'percentage':percentage, 'image':frame_b64, 'resultMsg':resultMsg})
+        return render(request, 'picker/resultPage.html', {'percentage':percentage, 'image':frame_b64, 'resultMsg':resultMsg, 'result':result})
         # ------------------ 서버에서 모델 처리 ---------------------------
         # if 'image' in request.FILES:
         #     try:

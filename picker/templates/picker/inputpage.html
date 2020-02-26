@@ -56,6 +56,7 @@
             </p>
             <input type="hidden" name="score" id="scoreInput"  value=""/>
             <input type="hidden" name="imageForm" id="imageForm"  value=""/>
+            <input type="hidden" name="score2" id="score2"  value=""/>
         </form>
     </div>
 </div>
@@ -109,6 +110,8 @@
     <li>로코픽커의 현재 정확도는 약 75% 정도입니다.</li>
     <li>높은 분류 정확도를 위해선 다른 사물이 없고, 공식 이미지가 권장됩니다.</li>
     <li>이 외의 이미지들은 올바르게 분류되지 못할 수 있습니다.</li>
+    <li>분류는 Tensorflow JS 를 사용합니다.</li>
+    <li>작동하지 않는 경우, Javascript를 사용 설정해 주세요.</li>
 </ul>
 
 
@@ -144,8 +147,8 @@
         function make_base(){
           base_image = new Image();
           imsrc = document.getElementById('sample2');
-          canvas.width = 640;
-          canvas.height = 832;
+          canvas.width = 360;
+          canvas.height = 450;
           context.drawImage(imsrc, 0,0);
         }
         predictCall();
@@ -186,9 +189,9 @@
                 redirectPost(score);
                 
             } catch (err) {
-                console.error('에러!');
-                window.location.replace("{% url 'errorPage' %}");
-                // console.error(err);
+                // console.error('에러!');
+                // window.location.replace("{% url 'errorPage' %}");
+                console.error(err);
             }
         }
         
@@ -222,6 +225,7 @@
             console.log('예측 완료');
             
             const score = prediction[0];
+            document.getElementById("score2").setAttribute("value", prediction[1]);
             
             return score;
             
