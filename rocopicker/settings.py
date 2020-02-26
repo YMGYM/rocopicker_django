@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '(b4ph^amj8x+9xkrkply!yqi8*xeel
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '.goorm.io', '로코픽커.site']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '.goorm.io', '.로코픽커.site']
 
 # Application definition
 
