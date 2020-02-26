@@ -39,6 +39,7 @@
 
             <div class='col-8 margintopauto'>
                 <p class="yuto " align="left">처리 중이에요! <br /> 잠시만 기다려 주세요!</p>
+                <p id="status" class="yuto" align="left"> </p>
             </div>  
         </div>
     </div>
@@ -63,7 +64,8 @@
 
 <div class="row">
     <div class='col-sm-12 align-center'>
-        <canvas id="myCanvas" width="0" height="0"></canvas><br />
+        
+        <canvas id="myCanvas" class="canvas" width="0" height="0"></canvas><br />
         <input type="file" name="image" class="margintop20" id="imageinput">
 
         <input type="submit" class="btn btn-primary" onclick="triggerForm()" value="서브밋!">
@@ -202,26 +204,31 @@
             
             
             console.log('모델을 불러오는 중');
-            
+            document.getElementById("status").innerHTML = "모델을 불러오고 있어요(조금 걸려요!)";
             const model = await tf.loadLayersModel('https://rocopicker.s3.amazonaws.com/rocopickerjs/model.json')
             console.log('모델 로드 완료');
+            document.getElementById("status").innerHTML = "모델 로드를 완료했어요.";
             
             const piximg = tf.browser.fromPixels(img);
             console.log('이미지 로드 완료');
+            document.getElementById("status").innerHTML = "이미지 로드를 완료했어요.";
             
             regulizer = tf.scalar(255.0);
             regulized_img = tf.div(piximg, regulizer);
             console.log('이미지 정규화 완료');
             console.log(regulized_img.shape)
+            document.getElementById("status").innerHTML = "이미지 정규화를 완료했어요.";
             
             const expdim = regulized_img.expandDims(0);
             console.log('이미지를 4차원 텐서로 변환');
+           
         
             const resized = tf.image.resizeBilinear(expdim,[299,299]);
             console.log('이미지 크기 변환 완료');
             
             
             console.log('예측 중');
+            document.getElementById("status").innerHTML = "예측 중이에요!";
             var prediction = await model.predict(resized).data();
             console.log('예측 완료');
             
