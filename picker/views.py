@@ -12,9 +12,9 @@ def mainpage(request):
 
 
 def inputPage(request):
-    model_url = os.path.join(settings.MODEL_ROOT, 'rocopickerjs/model.json')
+    # model_url = os.path.join(settings.MODEL_ROOT, "rocopickerjs/model.json")
     
-    
+    model_url = '../model/rocopickerjs/model.json'
     return render(request, 'picker/inputpage.html', {'model_url':model_url})
 
 

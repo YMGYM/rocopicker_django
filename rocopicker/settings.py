@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '(b4ph^amj8x+9xkrkply!yqi8*xeel
 # 출처: https://egg-money.tistory.com/115 [완숙의 에그머니]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '.goorm.io', '.로코픽커.site', '.xn--2o2b252bujaw5r.site']
@@ -144,4 +144,4 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MODEL_URL = '/model/'
-MODEL_ROOT = 'os.path.join(BASE_DIR, "model/")'
+MODEL_ROOT = os.path.join(BASE_DIR, "model/")
