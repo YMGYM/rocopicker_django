@@ -77,3 +77,7 @@ def error404(request, exception):
 
 def error500(request):
     return render(request,'picker/error.html', status=500)
+
+
+def tftest(request):
+    return render(request, 'picker/tftest.html')

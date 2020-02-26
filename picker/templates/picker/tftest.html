@@ -1,0 +1,21 @@
+{% extends 'picker/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h3>
+        tf 테스트 환경입니다.
+    </h3>
+
+<!-- Replace this with your image. Make sure CORS settings allow reading the image! -->
+<img id="img" src="{% static 'images/rocofull.png' %}" />
+
+    <script>
+        const img = document.getElementById('img');
+
+        const model = tf.loadGraphModel("{% static 'model/rocopickerjs/model.json' %}");
+        console.log(model)
+    </script>
+
+
+{% endblock content %}
+
