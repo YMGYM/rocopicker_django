@@ -22,9 +22,23 @@ def resultPage(request):
         
     
     if request.method == "POST":
-        percentage = float(request.POST['score']) * 100
+        
+        score = float(request.POST['score'])
+        if score >= 0.7:
+            resultMsg = "이건 로코의 퍼스널리티에 저스트-핏! 이네요! 확실해요!"
+        elif score >= 0.5:
+            resultMsg = "흠.. 조금 로코의 퍼스널리티의 필링이긴 한데..낫-클리어하네요!"
+        elif score >= 0.3:
+            resultMsg = "이건 로코라고 하기엔 낫-클리어한 인스피레이션이네요..."
+        else:
+            resultMsg = ".. 이건 로코의 포트레이트는 아니네요!"
+            
+            
+        percentage = score * 100
         frame_b64 = request.POST['imageForm']
-        return render(request, 'picker/resultPage.html', {'percentage':percentage, 'image':frame_b64})
+        
+        
+        return render(request, 'picker/resultPage.html', {'percentage':percentage, 'image':frame_b64, 'resultMsg':resultMsg})
         # ------------------ 서버에서 모델 처리 ---------------------------
         # if 'image' in request.FILES:
         #     try:

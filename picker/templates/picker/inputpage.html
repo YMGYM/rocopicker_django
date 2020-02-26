@@ -49,18 +49,25 @@
 
 <div class="row">
     <div class="col-sm-12 align-center">
-        <form action="{% url 'resultPage' %}" method="POST" onsubmit="return showSpin()" class="align-center" enctype="multipart/form-data">
+        <form action="{% url 'resultPage' %}" method="POST" onsubmit="return triggerForm();" id="scoreForm" class="align-center" enctype="multipart/form-data">
           {% csrf_token %}
             <p class="yuto">
                 가지고 있는 워크-오브-아트를 아래 폼에 넣어 주시고 <br />서브밋 해 주세요!
             </p>
-            <input type="file" name="image" class="margintop20" id="exampleFormControlFile1">
-
-            <input type="submit" class="btn btn-primary" value="서브밋!">
+            <input type="hidden" name="score" id="scoreInput"  value=""/>
+            <input type="hidden" name="imageForm" id="imageForm"  value=""/>
         </form>
     </div>
 </div>
 
+<div class="row">
+    <div class='col-sm-12 align-center'>
+        <canvas id="myCanvas" width="0" height="0"></canvas><br />
+        <input type="file" name="image" class="margintop20" id="imageinput">
+
+        <input type="submit" class="btn btn-primary" onclick="triggerForm()" value="서브밋!">
+    </div>
+</div>
 
 
 
@@ -74,24 +81,18 @@
 
         <div class="col-md-6">
             <div class="card align-center" style="width: 18rem;">
-              <img src="{% static 'images/rocofull.png' %}" class="card-img-top img-fluid" alt="사용자가 전송한 이미지">
+              <img src="{% static 'images/rocofull.png' %}" class="card-img-top img-fluid" id="sample1" alt="사용자가 전송한 이미지">
               <div class="card-body">
-                <form action="{% url 'sample1' %}" method="POST" class="align-center" onsubmit="return showSpin()" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type=submit class="btn btn-outline-secondary" value="이 이미지로 서브밋" />
-                </form>
+                   <input type=submit class="btn btn-outline-secondary" onclick="sample1();" value="이 이미지로 서브밋" />
               </div>
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="card align-center" style="width: 18rem;">
-              <img src="{% static 'images/rocofull2.png' %}" class="card-img-top img-fluid" alt="사용자가 전송한 이미지">
+              <img src="{% static 'images/rocofull2.png' %}" class="card-img-top img-fluid" id="sample2" alt="사용자가 전송한 이미지">
               <div class="card-body">
-                <form action="{% url 'sample2' %}" method="POST" onsubmit="return showSpin()" class="align-center" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type=submit class="btn btn-outline-secondary" value="이 이미지로 서브밋" />
-                </form>
+                    <input type=submit class="btn btn-outline-secondary" onclick="sample2();" value="이 이미지로 서브밋" />
               </div>
             </div>
         </div>
@@ -112,9 +113,134 @@
 
 
 <script>
+    
+    function triggerForm(){
+        var img = document.getElementById('myCanvas');
+        predictCall();
+    }
+    
+    function sample1(){
+        var canvas = document.getElementById('myCanvas');
+        context = canvas.getContext('2d');
+
+        make_base();
+
+        function make_base(){
+          base_image = new Image();
+          imsrc = document.getElementById('sample1');
+          canvas.width = 640;
+          canvas.height = 832;
+          context.drawImage(imsrc, 0,0);
+        }
+        predictCall();
+    }
+    
+    function sample2(){
+        var canvas = document.getElementById('myCanvas');
+        context = canvas.getContext('2d');
+
+        make_base();
+
+        function make_base(){
+          base_image = new Image();
+          imsrc = document.getElementById('sample2');
+          canvas.width = 640;
+          canvas.height = 832;
+          context.drawImage(imsrc, 0,0);
+        }
+        predictCall();
+    }
+    
     function showSpin(){
         document.getElementById("load").classList.remove("display-none");;
     }
+    
+    
+    
+    document.getElementById('imageinput').onchange = function(e) {
+      var img = new Image();
+      img.onload = draw;
+      img.onerror = failed;
+      img.src = URL.createObjectURL(this.files[0]);
+    };
+
+    function draw() {
+      var canvas = document.getElementById('myCanvas');
+      canvas.width = this.width;
+      canvas.height = this.height;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(this, 0,0);
+
+
+    }
+    function failed() {
+      console.error("이미지 에러. 다른 이미지를 입력해주세요");
+    }
+        
+    
+
+        async function predictCall(){
+            try {
+                showSpin();
+                score = await predict(); 
+                redirectPost(score);
+                
+            } catch (err) {
+                console.error('에러!');
+                window.location.replace("{% url 'errorPage' %}");
+                // console.error(err);
+            }
+        }
+        
+        async function predict() {
+            var img = document.getElementById('myCanvas');
+            
+            console.log(img);
+            
+            
+            console.log('모델을 불러오는 중');
+            const model = await tf.loadLayersModel("{% static 'model/rocopickerjs/model.json' %}")
+            console.log('모델 로드 완료');
+            
+            const piximg = tf.browser.fromPixels(img);
+            console.log('이미지 로드 완료');
+            
+            regulizer = tf.scalar(255.0);
+            regulized_img = tf.div(piximg, regulizer);
+            console.log('이미지 정규화 완료');
+            console.log(regulized_img.shape)
+            
+            const expdim = regulized_img.expandDims(0);
+            console.log('이미지를 4차원 텐서로 변환');
+        
+            const resized = tf.image.resizeBilinear(expdim,[299,299]);
+            console.log('이미지 크기 변환 완료');
+            
+            
+            console.log('예측 중');
+            var prediction = await model.predict(resized).data();
+            console.log('예측 완료');
+            
+            const score = prediction[0];
+            
+            return score;
+            
+            
+            
+            
+            
+        }
+
+        
+        function redirectPost(score) {
+            document.getElementById("scoreInput").setAttribute("value", score);
+            var canvas = document.getElementById('myCanvas');
+            var imgData = canvas.toDataURL();
+            
+            document.getElementById("imageForm").setAttribute("value", imgData);
+            document.getElementById("scoreForm").submit();
+        }
+    
 </script>
 
 
