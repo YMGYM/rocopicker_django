@@ -21,18 +21,24 @@ def resultPage(request):
     
         
     
-    if request.method == "POST":  
-        if 'image' in request.FILES:
-            try:
-                model
-            except NameError:
-                model = predictapp.load_model()
+    if request.method == "POST":
+        percentage = float(request.POST['score']) * 100
+        frame_b64 = request.POST['imageForm']
+        return render(request, 'picker/resultPage.html', {'percentage':percentage, 'image':frame_b64})
+        # ------------------ 서버에서 모델 처리 ---------------------------
+        # if 'image' in request.FILES:
+        #     try:
+        #         model
+        #     except NameError:
+        #         model = predictapp.load_model()
 
-            data = request.FILES['image']
-            result, frame_b64, percentage, msg = predictapp.predict(model, data)
+        #     data = request.FILES['image']
+        #     result, frame_b64, percentage, msg = predictapp.predict(model, data)
+        # return render(request, 'picker/resultPage.html', {'image':frame_b64, 'result':result, 'percentage':percentage, 'resultMsg':msg})
+        # -------------------------------------------------------
 
 
-            return render(request, 'picker/resultPage.html', {'image':frame_b64, 'result':result, 'percentage':percentage, 'resultMsg':msg})
+            
 
     return render(request, 'picker/error.html')
 def sample1predict(request):
