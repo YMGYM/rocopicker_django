@@ -6,16 +6,58 @@
         tf 테스트 환경입니다.
     </h3>
 
-<!-- Replace this with your image. Make sure CORS settings allow reading the image! -->
-<img id="img" src="{% static 'images/check06.jpg' %}" />
+<!-- <div class="row">
+    <div class="col-sm-12 align-center">
+        <form action="" method="POST" onsubmit="return showSpin()" class="align-center" enctype="multipart/form-data">
+          {% csrf_token %}
+            <p class="yuto">
+                가지고 있는 워크-오브-아트를 아래 폼에 넣어 주시고 <br />서브밋 해 주세요!
+            </p>
+            <input type="file" name="image" class="margintop20" id="imageinput">
+
+            <input type="submit" class="btn btn-primary" value="서브밋!">
+        </form>
+    </div>
+</div> -->
+<canvas id="myCanvas" width="200" height="100"></canvas>
+<input type="file" name="image" class="margintop20" id="imageinput">
+
+<input type="submit" class="btn btn-primary" onclick="predictCall()" value="서브밋!">
+<!-- <img id="img" src="{% static 'images/check06.jpg' %}" /> -->
 
     <script>
-        const img = document.getElementById('img');
-
-        // const model = tf.loadLayersModel("{% static 'model/rocopickerjs/model.json' %}");
-        // const prediction = model.predict(img);
+        document.getElementById('imageinput').onchange = function(e) {
+          var img = new Image();
+          img.onload = draw;
+          img.onerror = failed;
+          img.src = URL.createObjectURL(this.files[0]);
+          var canvas = document.getElementById('myCanvas');
+          canvas.id = "filledCanvas";
+        };
+        function draw() {
+          var canvas = document.getElementById('myCanvas');
+          canvas.width = this.width;
+          canvas.height = this.height;
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(this, 0,0);
+        }
+        function failed() {
+          console.error("이미지 에러. 다른 이미지를 입력해주세요");
+        }
         
-        async function asyncCall() {
+        async function predictCall(){
+            try {
+                await predict(); 
+            } catch (err) {
+                console.error("모델 예측 실패");
+                window.location.replace("{% url 'errorPage' %}");
+            }
+        }
+        
+        async function predict() {
+            var img = document.getElementById('filledCanvas');
+            
+            
             console.log('모델을 불러오는 중');
             const model = await tf.loadLayersModel("{% static 'model/rocopickerjs/model.json' %}")
             console.log('모델 로드 완료');
@@ -44,7 +86,6 @@
             
         }
 
-asyncCall();
     </script>
 
 {% endblock content %}

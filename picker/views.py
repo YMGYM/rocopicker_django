@@ -71,6 +71,8 @@ def creditPage(request):
     
     return render(request, 'picker/creditPage.html')
 
+def errorPage(request):
+    return render(request,'picker/error.html')
 
 def error404(request, exception):
     return render(request,'picker/error.html', status=404)
