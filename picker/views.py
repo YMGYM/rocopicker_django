@@ -12,19 +12,13 @@ def mainpage(request):
 
 
 def inputPage(request):
-    # model_url = os.path.join(settings.MODEL_ROOT, "rocopickerjs/model.json")
     
-    model_url = '../model/rocopickerjs/model.json'
-    return render(request, 'picker/inputpage.html', {'model_url':model_url})
+    return render(request, 'picker/inputpage.html')
 
 
 def resultPage(request):
-
-    
-        
     
     if request.method == "POST":
-        
         score = float(request.POST['score'])
         if score >= 0.7:
             resultMsg = "이건 로코의 퍼스널리티에 저스트-핏! 이네요! 확실해요!"
@@ -54,10 +48,10 @@ def resultPage(request):
         # return render(request, 'picker/resultPage.html', {'image':frame_b64, 'result':result, 'percentage':percentage, 'resultMsg':msg})
         # -------------------------------------------------------
 
-
-            
-
     return render(request, 'picker/error.html')
+
+
+
 def sample1predict(request):
     try:
         model
@@ -102,7 +96,3 @@ def error404(request, exception):
 
 def error500(request):
     return render(request,'picker/error.html', status=500)
-
-
-def tftest(request):
-    return render(request, 'picker/tftest.html')
