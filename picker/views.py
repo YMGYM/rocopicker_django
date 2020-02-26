@@ -12,8 +12,10 @@ def mainpage(request):
 
 
 def inputPage(request):
+    model_url = os.path.join(settings.MODEL_ROOT, 'rocopickerjs/model.json')
     
-    return render(request, 'picker/inputpage.html')
+    
+    return render(request, 'picker/inputpage.html', {'model_url':model_url})
 
 
 def resultPage(request):
@@ -36,6 +38,7 @@ def resultPage(request):
         result = [score, float(request.POST['score2'])]
         percentage = score * 100
         frame_b64 = request.POST['imageForm']
+        
         
         
         return render(request, 'picker/resultPage.html', {'percentage':percentage, 'image':frame_b64, 'resultMsg':resultMsg, 'result':result})

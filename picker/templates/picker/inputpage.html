@@ -202,7 +202,8 @@
             
             
             console.log('모델을 불러오는 중');
-            const model = await tf.loadLayersModel("{% static 'model/rocopickerjs/model.json' %}")
+            // const model = await tf.loadLayersModel('{% static 'rocopickerjs/model.json' %}')
+            const model = await tf.loadLayersModel('{{ model_url}}')
             console.log('모델 로드 완료');
             
             const piximg = tf.browser.fromPixels(img);
