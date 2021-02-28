@@ -1,4 +1,5 @@
 model/
+model/rocopickerjs
 README.md
 *.log
 *.pot
