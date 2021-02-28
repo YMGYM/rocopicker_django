@@ -53,8 +53,6 @@ pyasn1-modules==0.2.7
 pycodestyle==2.5.0
 pycparser==2.20
 pyflakes==2.2.0
-pygame==2.0.0
-Pygments==2.4.2
 pylint==2.4.4
 pyparsing==2.4.5
 pyrsistent==0.15.6
