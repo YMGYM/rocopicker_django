@@ -20,9 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '(b4ph^amj8x+9xkrkply!yqi8*xeel%1iwed$zq*td-zn3%*g*!)w')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '(b4ph^amj8x+9xkrkply!yqi8*xeel%1iwed$zq*td-zn3%*g*!)w')
 # changed to New SECRET_KEY
-SECRET_KEY = os.environ['DJANGO_SECRET']
+# SECRET_KEY = os.environ['DJANGO_SECRET']
 # 출처: https://egg-money.tistory.com/115 [완숙의 에그머니]
 
 # SECURITY WARNING: don't run with debug turned on in production!

@@ -3,21 +3,19 @@ from django.shortcuts import render
 from PIL import Image
 import os
 from django.conf import settings
-import numpy as np
+# import numpy as np
 global model
 
+
 def mainpage(request):
-    
     return render(request, 'picker/mainpage.html')
 
 
 def inputPage(request):
-    
     return render(request, 'picker/inputpage.html')
 
 
 def resultPage(request):
-    
     if request.method == "POST":
         score = float(request.POST['score'])
         if score >= 0.7:
@@ -28,13 +26,13 @@ def resultPage(request):
             resultMsg = "이건 로코라고 하기엔 낫-클리어한 인스피레이션이네요..."
         else:
             resultMsg = ".. 이건 로코의 포트레이트는 아니네요!"
-            
+
         result = [score, float(request.POST['score2'])]
         percentage = score * 100
         frame_b64 = request.POST['imageForm']
-        
-        
-        
+
+
+
         return render(request, 'picker/resultPage.html', {'percentage':percentage, 'image':frame_b64, 'resultMsg':resultMsg, 'result':result})
         # ------------------ 서버에서 모델 처리 ---------------------------
         # if 'image' in request.FILES:
@@ -51,48 +49,46 @@ def resultPage(request):
     return render(request, 'picker/error.html')
 
 
-
 def sample1predict(request):
     try:
         model
     except NameError:
-        
+
         model = predictapp.load_model()
-    
-    data = Image.open(os.path.join(settings.STATICFILES_DIRS[0],'images/sample1.jpg')).convert('RGB') 
-    
+
+    data = Image.open(os.path.join(settings.STATICFILES_DIRS[0], 'images/sample1.jpg')).convert('RGB') 
+
     result, frame_b64, percentage, msg = predictapp.predict(model, data)
-    
-    
-    
+
     return render(request, 'picker/resultPage.html', {'image':frame_b64, 'result':result, 'percentage':percentage, 'resultMsg':msg})
-    
-    
+
+
 def sample2predict(request):
     try:
         model
     except NameError:
-        
+
         model = predictapp.load_model()
-    
+
     data = Image.open(os.path.join(settings.STATICFILES_DIRS[0],'images/sample2.jpg')).convert('RGB') 
-    
-    
+
     result, frame_b64, percentage, msg = predictapp.predict(model, data)
-    
-    
+
     return render(request, 'picker/resultPage.html', {'image':frame_b64, 'result':result, 'percentage':percentage, 'resultMsg':msg})
 
 
 def creditPage(request):
-    
+
     return render(request, 'picker/creditPage.html')
 
+
 def errorPage(request):
-    return render(request,'picker/error.html')
+    return render(request, 'picker/error.html')
+
 
 def error404(request, exception):
-    return render(request,'picker/error.html', status=404)
+    return render(request, 'picker/error.html', status=404)
+
 
 def error500(request):
-    return render(request,'picker/error.html', status=500)
+    return render(request, 'picker/error.html', status=500)
