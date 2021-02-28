@@ -198,7 +198,7 @@
             } catch (err) {
                 console.error('에러!');
                 // window.location.replace("{% url 'errorPage' %}");
-                // console.error(err);
+                console.error(err);
             }
         }
         
@@ -211,7 +211,7 @@
             console.log('모델을 불러오는 중');
             document.getElementById("status").innerHTML = "모델을 불러오고 있어요(조금 걸려요!)";
             
-            const model = await tf.loadLayersModel("https://raw.githubusercontent.com/YMGYM/rocopicker_django/master/model/model.json")
+            const model = await tf.loadLayersModel("https://raw.githubusercontent.com/YMGYM/rocopicker_django/master/model/rocopickerjs/model.json")
             console.log('모델 로드 완료');
             document.getElementById("status").innerHTML = "모델 로드를 완료했어요.";
             
