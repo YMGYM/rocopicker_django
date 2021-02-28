@@ -193,11 +193,11 @@
             try {
                 showSpin();
                 score = await predict(); 
-                // redirectPost(score);
+                redirectPost(score);
                 
             } catch (err) {
                 console.error('에러!');
-                // window.location.replace("{% url 'errorPage' %}");
+                window.location.replace("{% url 'errorPage' %}");
                 console.error(err);
             }
         }

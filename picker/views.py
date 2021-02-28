@@ -1,9 +1,4 @@
 from django.shortcuts import render
-# from . import predictapp
-from PIL import Image
-import os
-from django.conf import settings
-# import numpy as np
 global model
 
 
@@ -47,34 +42,6 @@ def resultPage(request):
         # -------------------------------------------------------
 
     return render(request, 'picker/error.html')
-
-
-def sample1predict(request):
-    try:
-        model
-    except NameError:
-
-        model = predictapp.load_model()
-
-    data = Image.open(os.path.join(settings.STATICFILES_DIRS[0], 'images/sample1.jpg')).convert('RGB') 
-
-    result, frame_b64, percentage, msg = predictapp.predict(model, data)
-
-    return render(request, 'picker/resultPage.html', {'image':frame_b64, 'result':result, 'percentage':percentage, 'resultMsg':msg})
-
-
-def sample2predict(request):
-    try:
-        model
-    except NameError:
-
-        model = predictapp.load_model()
-
-    data = Image.open(os.path.join(settings.STATICFILES_DIRS[0],'images/sample2.jpg')).convert('RGB') 
-
-    result, frame_b64, percentage, msg = predictapp.predict(model, data)
-
-    return render(request, 'picker/resultPage.html', {'image':frame_b64, 'result':result, 'percentage':percentage, 'resultMsg':msg})
 
 
 def creditPage(request):
